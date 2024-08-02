@@ -1,9 +1,12 @@
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+// diperlukan karena untuk menjalankan server dengan nextjs nya
 import next from "next";
 
+// inisialisasi nextjs server
 const dev = process.env.NODE_ENV !== "production";
+// inisialisasi app dengan nextjs agar bisa menggunakan next js di satu server
 const app = next({ dev });
 const handle = app.getRequestHandler();
 

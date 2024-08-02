@@ -32,8 +32,10 @@ export const AuthOptions = {
           },
         ];
 
-        if (username === user.username && password === user.password) {
-          return user;
+        if (username === "gilang" && password === "123") {
+          return user[0];
+        } else if (username === user.username[1] && password === user.password[1]) {
+          return user[1];
         } else {
           return null;
         }
@@ -57,6 +59,9 @@ export const AuthOptions = {
 
       return session;
     },
+  },
+  pages: {
+    signIn: "/login",
   },
 };
 
