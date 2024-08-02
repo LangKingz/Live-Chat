@@ -10,12 +10,12 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {session ? (
         <>
-          <button onClick={() => signOut()}>Logout</button>
+          <button className="btn btn-primary" onClick={() => signOut()}>Logout</button>
           <p>Chat Live</p>
           <ChatPages />
         </>
       ) : (
-        <button onClick={() => signIn()}>Login</button>
+        <button className="btn btn-primary" onClick={() => signIn()}>Login</button>
       )}
     </main>
   );

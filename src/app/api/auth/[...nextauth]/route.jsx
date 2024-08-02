@@ -8,11 +8,11 @@ export const AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET || "secret",
   providers: [
     Credentials({
-      name: "Credentials",
+      name: "credentials",
       type: "credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        username: { label: "username", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         const { username, password } = credentials;
@@ -21,20 +21,21 @@ export const AuthOptions = {
           {
             id: "1",
             name: "Gilang",
+            email: "VJWjv@example.com",
             username: "gilang",
             password: "123",
           },
           {
             id: "2",
             name: "Miko",
+            email: "VJWjv@example.com",
             username: "Miko",
             password: "123",
           },
         ];
-
-        if (username === "gilang" && password === "123") {
+        if (username === user[0].username && password === user[0].password) {
           return user[0];
-        } else if (username === user.username[1] && password === user.password[1]) {
+        } else if (username === user[1].username && password === user[1].password) {
           return user[1];
         } else {
           return null;
@@ -44,10 +45,11 @@ export const AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, accounts }) {
-      if (accounts?.provider === "Credentials" && user) {
+      if (accounts?.provider === "credentials" && user) {
         token.id = user.id;
         token.name = user.name;
         token.username = user.username;
+        token.email = user.email;
       }
 
       return token;
@@ -56,6 +58,7 @@ export const AuthOptions = {
       session.user.id = token.id;
       session.user.username = token.username;
       session.user.name = token.name;
+      session.user.email = token.email;
 
       return session;
     },
