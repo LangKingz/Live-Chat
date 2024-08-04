@@ -8,11 +8,11 @@ import next from "next";
 
 /**
  * `dev` adalah sebuah variabel yang digunakan untuk menentukan apakah aplikasi sedang berjalan di lingkungan pengembangan atau lingkungan produksi.
- * 
+ *
  * `process.env.NODE_ENV` adalah variabel yang disediakan oleh Node.js dan digunakan untuk menentukan lingkungan aplikasi. Secara default, nilainya selalu "development" di lingkungan pengembangan dan "production" di lingkungan produksi.
- * 
+ *
  * Dalam kode ini, `dev` diinisialisasi dengan perbandingan operator !== (tidak sama dengan) antara `process.env.NODE_ENV` dan "production". Jika nilai `process.env.NODE_ENV` bukan "production", maka `dev` akan bernilai true dan aplikasi akan dijalankan dalam mode pengembangan.
- * 
+ *
  * Ini penting karena dalam mode pengembangan, aplikasi biasanya dijalankan dengan fitur-fitur tambahan seperti pengembangan, pengembangan, dan penyederhanaan kode yang tidak diperlukan di lingkungan produksi. Dalam mode produksi, aplikasi dibuat menjadi lebih efisien dan dioptimalisasi untuk kinerja.
  */
 
@@ -28,6 +28,11 @@ app.prepare().then(() => {
 
   io.on("connection", (socket) => {
     console.log("user connected with id: ", socket.id);
+
+    socket.on("join_room", (roomId) => {
+      socket.join(roomId);
+      console.log(`User with id: ${socket.id} join room ${roomId}`);
+    });
 
     socket.on("message", (msg) => {
       try {
