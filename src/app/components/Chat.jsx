@@ -6,7 +6,7 @@ import io from "socket.io-client";
 
 const socket = io();
 
-const ChatPages = () => {
+const ChatPages = ({roomId}) => {
   const [pesan, setPesan] = useState("");
   const [chat, setChat] = useState([]);
   const {data:session} = useSession()

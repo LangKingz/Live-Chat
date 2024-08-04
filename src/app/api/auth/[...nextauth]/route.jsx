@@ -44,8 +44,8 @@ export const AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, accounts }) {
-      if (accounts?.provider === "credentials" && user) {
+    async jwt({ token, user, account }) {
+      if (account?.provider === "credentials" && user) {
         token.id = user.id;
         token.name = user.name;
         token.username = user.username;
