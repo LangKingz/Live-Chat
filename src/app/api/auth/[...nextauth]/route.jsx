@@ -1,6 +1,26 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
+
+const users = [
+  {
+    id: "1",
+    name: "Gilang",
+    email: "gilanglibna@gmail.com",
+    username: "gilang",
+    password: "123",
+  },
+  {
+    id: "2",
+    name: "Miko",
+    email: "aryagilng@gmail.com",
+    username: "Miko",
+    password: "123",
+  },
+];
+
+
+
 export const AuthOptions = {
   session: {
     strategy: "jwt",
@@ -17,29 +37,13 @@ export const AuthOptions = {
       async authorize(credentials) {
         const { username, password } = credentials;
 
-        const user = [
-          {
-            id: "1",
-            name: "Gilang",
-            email: "VJWjv@example.com",
-            username: "gilang",
-            password: "123",
-          },
-          {
-            id: "2",
-            name: "Miko",
-            email: "VJWjv@example.com",
-            username: "Miko",
-            password: "123",
-          },
-        ];
-        if (username === user[0].username && password === user[0].password) {
-          return user[0];
-        } else if (username === user[1].username && password === user[1].password) {
-          return user[1];
-        } else {
-          return null;
+        const user = users.find((e) => e.username === username && e.password === password);
+        if (!user) {
+          throw new Error("User tidak ditemukan");
         }
+
+        return user;
+
       },
     }),
   ],

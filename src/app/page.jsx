@@ -15,9 +15,11 @@ export default function Home() {
           <Homepages />
         </>
       ) : (
-        <button className="btn btn-primary" onClick={() => signIn()}>
-          Login
-        </button>
+        <div className="flex h-screen justify-center items-center">
+          <button className="btn btn-primary" onClick={() => signIn()}>
+            Login
+          </button>
+        </div>
       )}
     </main>
   );

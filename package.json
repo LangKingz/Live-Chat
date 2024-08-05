@@ -15,10 +15,12 @@
     "next": "14.2.5",
     "next-auth": "^4.24.7",
     "node": "^20.16.0",
+    "nodemailer": "^6.9.14",
     "react": "^18",
     "react-dom": "^18",
     "socket.io": "^4.7.5",
-    "socket.io-client": "^4.7.5"
+    "socket.io-client": "^4.7.5",
+    "vercel": "^35.2.3"
   },
   "devDependencies": {
     "daisyui": "^4.12.10",
