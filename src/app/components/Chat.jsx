@@ -36,6 +36,10 @@ const ChatPages = ({ params }) => {
   }, [roomId]);
 
   const kirimPesan = () => {
+    if (pesan === "" || pesan === "") {
+      return;
+    }
+
     const msg = {
       user: session.user?.name,
       text: pesan,

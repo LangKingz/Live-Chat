@@ -1,25 +1,6 @@
+import getDataApi from "@/app/services";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
-
-const users = [
-  {
-    id: "1",
-    name: "Gilang",
-    email: "gilanglibna@gmail.com",
-    username: "gilang",
-    password: "123",
-  },
-  {
-    id: "2",
-    name: "Miko",
-    email: "aryagilng@gmail.com",
-    username: "Miko",
-    password: "123",
-  },
-];
-
-
 
 export const AuthOptions = {
   session: {
@@ -37,16 +18,20 @@ export const AuthOptions = {
       async authorize(credentials) {
         const { username, password } = credentials;
 
+        const response = await getDataApi("http://localhost:3000/api/Account");
+        const users = response;
+
         const user = users.find((e) => e.username === username && e.password === password);
+
         if (!user) {
           throw new Error("User tidak ditemukan");
         }
 
         return user;
-
       },
     }),
   ],
+
   callbacks: {
     async jwt({ token, user, account }) {
       if (account?.provider === "credentials" && user) {
